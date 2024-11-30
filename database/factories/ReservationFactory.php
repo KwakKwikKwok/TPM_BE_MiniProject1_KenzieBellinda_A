@@ -14,8 +14,9 @@ class ReservationFactory extends Factory
     {
         return [
             'guest_id' => Guest::factory(), 
-            'reservation_time' => $this->faker->dateTimeThisYear(),
-            'seats' => $this->faker->numberBetween(1, 10),
+            'reservation_time' => fake() ->dateTimeThisYear(),
+            'seats' => fake() ->numberBetween(1, 10),
+            'image_path' => fake() ->imageUrl()
         ];
     }
 }

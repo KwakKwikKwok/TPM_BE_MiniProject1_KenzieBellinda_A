@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('guest_id')->references('id')->on('guests')->cascadeOnDelete()->cascadeOnUpdate();
             $table->dateTime('reservation_time'); 
             $table->integer('seats');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
         

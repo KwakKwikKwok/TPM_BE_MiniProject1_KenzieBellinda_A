@@ -12,9 +12,9 @@ class GuestFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
+            'name' => fake() ->name(),
+            'email' => fake() ->unique()->safeEmail(),
+            'phone' => fake() ->phoneNumber()
         ];
     }
 }
