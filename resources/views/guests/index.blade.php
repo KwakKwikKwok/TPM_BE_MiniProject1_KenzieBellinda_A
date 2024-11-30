@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Reservation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body>
@@ -61,24 +61,29 @@
     <h2>Reserved List:</h2>
     <ul>
         @forelse ($guests as $guest)
-        <div class="card" style="width: 18rem;">
-            <ul class="list-group list-group-flush">
-              @foreach ($guest->reservations as $reservation)
-                  <img src="{{ asset('storage/'.$reservation->image_path) }}" alt="{{ $guest->name }}" class="card-img-top">
-              @endforeach
-              <li class="list-group-item">Name            : {{ $guest->name }}</li>
-              <li class="list-group-item">Email           : {{ $guest->email }}</li>
-              <li class="list-group-item">Phone Number    : {{ $guest->phone }}</li>
-              @foreach ($guest->reservations as $reservation)
-                <li class="list-group-item">Date and Time   : {{ $reservation->reservation_time }}</li>
-                <li class="list-group-item">Seats           : {{ $reservation->seats }} seats</li>
-              @endforeach
-            </ul>
-        </div><br><br>
-        @empty
-        <div>
-          Data is Empty.
-        </div>
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    @foreach ($guest->reservations as $reservation)
+                        <img src="{{ asset('storage/'.$reservation->image_path) }}" alt="{{ $guest->name }}" class="card-img-top">
+                    @endforeach
+                    <li class="list-group-item">Name            : {{ $guest->name }}</li>
+                    <li class="list-group-item">Email           : {{ $guest->email }}</li>
+                    <li class="list-group-item">Phone Number    : {{ $guest->phone }}</li>
+                    @foreach ($guest->reservations as $reservation)
+                        <li class="list-group-item">Date and Time   : {{ $reservation->reservation_time }}</li>
+                        <li class="list-group-item">Seats           : {{ $reservation->seats }} seats</li>
+                    @endforeach
+                        <a href="{{ route('getEditReservation', $guest->id) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('deleteReservation', $guest->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </ul>
+            </div><br><br>
+            @empty
+            <div>
+            Data is Empty.
+            </div>
         @endforelse
     </ul>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
